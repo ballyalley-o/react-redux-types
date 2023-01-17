@@ -1,3 +1,5 @@
+import { ActionType } from "../action-types";
+import { Action } from "../actions";
 
 interface RepositoriesState {
     loading: boolean;
@@ -5,38 +7,14 @@ interface RepositoriesState {
     data: string[];
 }
 
-// interface Action {
-//     type: string;
-//     payload?: any;
-// }
-
-type Action =
-| SearchRepositoriesAction
-| SearchRepositoriesSuccessAction
-| SearchRepositoriesErrorAction
-
-enum ActionType {
-    SEARCH_REPOSITORIES = 'search_repositories',
-    SEARCH_REPOSITOES_SUCCESS = 'search_repositories_success',
-    SEARCH_REPOSITORIES_ERROR = 'search_repositories_error'
-}
-
-interface SearchRepositoriesAction {
-    type: ActionType.SEARCH_REPOSITORIES;
-}
-
-interface SearchRepositoriesSuccessAction {
-    type: ActionType.SEARCH_REPOSITOES_SUCCESS;
-    payload: string[];
-}
-
-interface SearchRepositoriesErrorAction {
-    type: ActionType.SEARCH_REPOSITORIES_ERROR;
-    payload: string;
+const initialState = {
+    loading: false,
+    error: null,
+    data: []
 }
 
 const reducer = (
-    state: RepositoriesState,
+    state: RepositoriesState = initialState,
     action: Action ): RepositoriesState => {
     switch (action.type) {
         case ActionType.SEARCH_REPOSITORIES:
@@ -48,7 +26,6 @@ const reducer = (
         default:
             return state;
     }
-
 }
 
 export default reducer;
